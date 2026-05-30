@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.chucny.wizardplanet",
+    "sha256_cert_fingerprints": [
+      "C8:78:05:56:F8:8F:2D:9B:2A:FB:ED:44:65:4B:FD:9A:18:AA:C0:1F:D0:EB:7B:EA:2C:31:A5:85:A1:90:2E:61"
+    ]
+  }
+}]
