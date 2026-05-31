@@ -1,1 +1,232 @@
-<h1>This is just a test, i have to get the asetlinks.json to work for my PWA</h1>
+<script>
+
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dev Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#f7f9fc;
+    --text:#0b1220;
+    --muted:#0b1220aa;
+    --stroke:#00000014;
+    --accent:#2563eb;
+    --accent2:#10b981;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter, system-ui;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background: radial-gradient(circle at 20% 30%, #2563eb14, transparent 40%),
+                radial-gradient(circle at 80% 70%, #10b98114, transparent 40%),
+                var(--bg);
+    color:var(--text);
+}
+
+.wrap{
+    height:100vh;
+    display:grid;
+    grid-template-rows: auto 1fr auto;
+    padding:40px 6%;
+    gap:24px;
+}
+
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+}
+
+.title{
+    font-size:44px;
+    font-weight:800;
+    letter-spacing:-1px;
+}
+
+.subtitle{
+    margin-top:6px;
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* MAIN LAYOUT */
+.main{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap:18px;
+}
+
+/* FEATURE CARD */
+.feature{
+    border:1px solid var(--stroke);
+    border-radius:16px;
+    padding:22px;
+    background:white;
+    transition:.15s ease;
+}
+
+.feature:hover{
+    transform:translateY(-2px);
+    border-color:#2563eb55;
+}
+
+h2{
+    font-size:12px;
+    letter-spacing:1.4px;
+    color:var(--muted);
+    margin-bottom:10px;
+}
+
+.big-link{
+    display:block;
+    padding:14px;
+    margin:10px 0;
+    border:1px solid var(--stroke);
+    border-radius:12px;
+    text-decoration:none;
+    color:var(--text);
+    transition:.15s ease;
+}
+
+.big-link:hover{
+    transform:translateY(-2px);
+    border-color:#2563eb55;
+}
+
+.big-link strong{
+    display:block;
+    font-size:14px;
+}
+
+.big-link span{
+    font-size:12px;
+    color:var(--muted);
+}
+
+/* SIDE LINKS */
+.side{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.small{
+    border:1px solid var(--stroke);
+    border-radius:12px;
+    padding:14px;
+    background:white;
+    transition:.15s ease;
+}
+
+.small:hover{
+    transform:translateY(-2px);
+}
+
+/* FOOTER */
+footer{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid var(--stroke);
+    padding-top:14px;
+}
+
+/* simple fade in */
+.wrap{
+    animation:in .35s ease both;
+}
+
+@keyframes in{
+    from{opacity:0; transform:translateY(8px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+a{ text-decoration:none; color:inherit; }
+
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header>
+    <div>
+        <div class="title">Chucny</div>
+        <div class="subtitle">Developer · AR systems · Interactive worlds</div>
+    </div>
+</header>
+
+<div class="main">
+
+    <!-- PRIMARY DISCOVERY AREA -->
+    <div class="feature">
+
+        <h2>FEATURED</h2>
+
+        <a class="big-link" href="https://github.com/chucny">
+            <strong>GitHub</strong>
+            <span>Code, experiments, open projects</span>
+        </a>
+
+        <a class="big-link" href="https://chucny.github.io/wizard-planet">
+            <strong>Wizard Planet</strong>
+            <span>A geolocational AR adventure built for the modern web. <b>→</b></span>
+        </a>
+
+        
+
+    </div>
+
+    <!-- SECONDARY LINKS -->
+    <div class="side">
+
+        <div class="small">
+            <h2>Where technology comes to life</h2>
+            <div style="font-size:13px; color:var(--muted)">
+                I'm Chucny. A web, AR and computing developer designing projects that actually let us connect technology to our real world with such things as AR, stocks and maps. Something you never knew could come to life in our technology.
+            </div>
+        </div>
+
+        <div class="small">
+            <h2>CONTACT</h2>
+            <div style="font-size:13px; color:var(--muted)">
+                Contact me at: jasupelaapelej@gmail.com
+            </div>
+        </div>
+
+        <div class="small">
+            <h2>WIZARD PLANET</h2>
+            <div style="font-size:13px; color:var(--muted)">
+                We develope Wizard Planet, a new AR geolocational experience built for the modern web.
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <div></div>
+    <div>© Chucny 2026</div>
+</footer>
+
+</div>
+
+</body>
+</html>
