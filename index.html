@@ -1,232 +1,497 @@
-<script>
+<script></script>
 
-</script>
-<!DOCTYPE html>
-<html lang="en">
+    <title>ChucnyServer - The Private Pokémon GO Server Engine</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #2563eb;
+            --accent-success: #16a34a;
+            --accent-glow: rgba(37, 99, 235, 0.08);
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Animated Typography Header */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        /* Word Rotation Ticker Animation */
+        .ticker-container {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            height: 40px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ticker-words {
+            display: inline-flex;
+            flex-direction: column;
+            height: 40px;
+            animation: rotateWords 9s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+        }
+
+        .ticker-word {
+            height: 40px;
+            line-height: 40px;
+            text-align: left;
+            font-weight: 800;
+        }
+
+        .w-blue { color: var(--accent-primary); }
+        .w-green { color: var(--accent-success); }
+        .w-purple { color: #7c3aed; }
+
+        @keyframes rotateWords {
+            0%, 25% { transform: translateY(0); }
+            30%, 55% { transform: translateY(-40px); }
+            60%, 85% { transform: translateY(-80px); }
+            90%, 100% { transform: translateY(0); }
+        }
+
+        /* Clean Visual Grid Showcase */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 24px;
+            margin-bottom: 60px;
+            align-items: stretch;
+        }
+
+        .gallery-main {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-thumbs {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .gallery-thumb-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screenshot-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .img-wrapper {
+            background: #f1f5f9;
+            border-radius: 12px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .img-wrapper img:hover {
+            transform: scale(1.04);
+        }
+
+        /* Functional Section Cards */
+        section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            opacity: 0;
+            transform: translateY(15px);
+            animation: slideUpClear 0.6s ease-out forwards;
+        }
+
+        section:nth-of-type(1) { animation-delay: 0.1s; }
+        section:nth-of-type(2) { animation-delay: 0.2s; }
+        section:nth-of-type(3) { animation-delay: 0.3s; }
+        section:nth-of-type(4) { animation-delay: 0.4s; }
+
+        @keyframes slideUpClear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            letter-spacing: -0.3px;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        /* Modern Clean Sequential Lists */
+        ol {
+            list-style: none;
+            counter-reset: custom-counter;
+        }
+
+        ol li {
+            counter-increment: custom-counter;
+            position: relative;
+            padding-left: 44px;
+            margin-bottom: 18px;
+            color: var(--text-main);
+        }
+
+        ol li::before {
+            content: counter(custom-counter);
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 26px;
+            height: 26px;
+            background-color: var(--accent-glow);
+            color: var(--accent-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* Unordered Features Grid layout */
+        .features-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            list-style: none;
+        }
+
+        .features-layout li {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 14px;
+            background: var(--bg-color);
+            transition: all 0.2s ease;
+        }
+
+        .features-layout li:hover {
+            border-color: var(--accent-primary);
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .features-layout strong {
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+            letter-spacing: -0.2px;
+        }
+
+        .features-layout span {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: block;
+            line-height: 1.5;
+        }
+
+        /* Visual Inline Badges & Elements */
+        .beta-pill {
+            background: #ffedd5;
+            color: #ea580c;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 8px;
+            vertical-align: middle;
+            border: 1px solid #fed7aa;
+        }
+
+        code {
+            background-color: #f1f5f9;
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-family: SFMono-Regular, Consolas, monospace;
+            font-size: 0.9em;
+            color: #0f172a;
+            border: 1px solid #e2e8f0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.6rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-thumbs { grid-template-columns: 1fr 1fr; grid-template-rows: none; }
+            section { padding: 24px; }
+        }
+    </style>
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Chucny</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChucnyServer</title>
+</head>
+<a href="https://github.com" target="_blank" rel="noopener noreferrer" class="github-btn">
+    <svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor">
+        
+    </svg>
+    <span>View on GitHub</span>
+</a>
 
 <style>
-:root{
-    --bg:#f7f9fc;
-    --text:#0b1220;
-    --muted:#0b1220aa;
-    --stroke:#00000014;
-    --accent:#2563eb;
-    --accent2:#10b981;
-}
+    .github-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #24292f;
+        color: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        user-select: none;
+        border: 1px solid rgba(27, 31, 36, 0.15);
+        border-radius: 6px;
+        padding: 5px 16px;
+        text-decoration: none;
+        box-shadow: 0 1px 0 rgba(27, 31, 36, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Inter, system-ui;
-}
+    .github-btn:hover {
+        background-color: #1f2327;
+        text-decoration: none;
+    }
 
-body{
-    height:100vh;
-    overflow:hidden;
-    background: radial-gradient(circle at 20% 30%, #2563eb14, transparent 40%),
-                radial-gradient(circle at 80% 70%, #10b98114, transparent 40%),
-                var(--bg);
-    color:var(--text);
-}
-
-.wrap{
-    height:100vh;
-    display:grid;
-    grid-template-rows: auto 1fr auto;
-    padding:40px 6%;
-    gap:24px;
-}
-
-/* HEADER */
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-}
-
-.title{
-    font-size:44px;
-    font-weight:800;
-    letter-spacing:-1px;
-}
-
-.subtitle{
-    margin-top:6px;
-    color:var(--muted);
-    font-size:14px;
-}
-
-/* MAIN LAYOUT */
-.main{
-    display:grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap:18px;
-}
-
-/* FEATURE CARD */
-.feature{
-    border:1px solid var(--stroke);
-    border-radius:16px;
-    padding:22px;
-    background:white;
-    transition:.15s ease;
-}
-
-.feature:hover{
-    transform:translateY(-2px);
-    border-color:#2563eb55;
-}
-
-h2{
-    font-size:12px;
-    letter-spacing:1.4px;
-    color:var(--muted);
-    margin-bottom:10px;
-}
-
-.big-link{
-    display:block;
-    padding:14px;
-    margin:10px 0;
-    border:1px solid var(--stroke);
-    border-radius:12px;
-    text-decoration:none;
-    color:var(--text);
-    transition:.15s ease;
-}
-
-.big-link:hover{
-    transform:translateY(-2px);
-    border-color:#2563eb55;
-}
-
-.big-link strong{
-    display:block;
-    font-size:14px;
-}
-
-.big-link span{
-    font-size:12px;
-    color:var(--muted);
-}
-
-/* SIDE LINKS */
-.side{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.small{
-    border:1px solid var(--stroke);
-    border-radius:12px;
-    padding:14px;
-    background:white;
-    transition:.15s ease;
-}
-
-.small:hover{
-    transform:translateY(-2px);
-}
-
-/* FOOTER */
-footer{
-    display:flex;
-    justify-content:space-between;
-    font-size:12px;
-    color:var(--muted);
-    border-top:1px solid var(--stroke);
-    padding-top:14px;
-}
-
-/* simple fade in */
-.wrap{
-    animation:in .35s ease both;
-}
-
-@keyframes in{
-    from{opacity:0; transform:translateY(8px);}
-    to{opacity:1; transform:translateY(0);}
-}
-
-a{ text-decoration:none; color:inherit; }
-
+    .github-btn:active {
+        background-color: #171b1f;
+    }
 </style>
-</head>
 
 <body>
 
-<div class="wrap">
+    <div class="container">
+    <header>
+        <h1>ChucnyServer</h1>
+        <div class="ticker-container">
+            A Pokemon GO server designed to be
+            <div class="ticker-words">
+                <span class="ticker-word w-blue">Open Source</span>
+                <span class="ticker-word w-green">Clean</span>
+                <span class="ticker-word w-purple">Fast</span>
+                <span class="ticker-word w-purple">Raw</span>
+                <span class="ticker-word w-purple">Professional</span>
+            </div>
+        </div>
+    </header>
+</div>
 
-<header>
-    <div>
-        <div class="title">Chucny</div>
-        <div class="subtitle">Developer · AR systems · Interactive worlds</div>
-    </div></header>
+<!-- Standalone CSS injection explicitly powering your ticker container logic -->
+<style>
+    .ticker-container {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: 40px;
+        overflow: hidden;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
 
-<div class="main">
+    .ticker-words {
+        display: inline-flex;
+        flex-direction: column;
+        height: 40px;
+        /* Loops smoothly through 5 words over 12 seconds */
+        animation: rotateFiveWords 7s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+    }
 
-    <!-- PRIMARY DISCOVERY AREA -->
-    <div class="feature">
+    .ticker-word {
+        height: 40px;
+        line-height: 40px;
+        text-align: left;
+        display: block;
+        white-space: nowrap;
+    }
 
-        <h2>FEATURED</h2>
+    /* Distinct color mapping classes for each phrase group */
+    .w-blue { color: #2563eb; }
+    .w-green { color: #16a34a; }
+    .w-purple { color: #7c3aed; }
 
-        <a class="big-link" href="https://github.com/chucny">
-            <strong>GitHub</strong>
-            <span>Code, experiments, open projects</span>
-        </a>
+    /* Precise mathematical keyframes isolating 5 distinct vertical positions */
+    @keyframes rotateFiveWords {
+        0%, 15% { transform: translateY(0); }
+        20%, 35% { transform: translateY(-40px); }
+        40%, 55% { transform: translateY(-80px); }
+        60%, 75% { transform: translateY(-120px); }
+        80%, 95% { transform: translateY(-160px); }
+        100% { transform: translateY(0); }
+    }
+</style>
 
-        <a class="big-link" href="https://chucny.github.io/wizard-planet">
-            <strong>Wizard Planet</strong>
-            <span>A geolocational AR adventure built for the modern web. <b>→</b></span>
-        </a>
 
         
 
+        <section id="overview">
+            <h2>📁 Overview</h2>
+            <p><strong>ChucnyServer</strong> is a custom <strong>MITM</strong> (man in the middle) <strong>0.29.0 Pokemon GO server</strong> written from scratch in Python. The implementation runs a highly modified branch extension of <code>Pokemon-GO-Private-Server</code> structural logic created by @mobraxton5-ux to support custom game client behavior.</p>
+        </section>
+
+        <section id="run">
+            <h2>🖥️ How to Run</h2>
+            <ol>
+                <li>Run the dependency file <code>/scripts/DOWNLOAD.py</code> to install dependencies. Alternatively (recommended) install manually.</li>
+                <li>Download (<strong>DM @chucny on Discord to get the assets if you don't have them</strong>).</li>
+                <li>Run <code>/chucnyserver/__main__.py</code>.</li>
+                <li>Install the legacy <strong>Pokemon GO 0.29.0 APK</strong></li>
+                <li>Install <code>CA.crt</code> located in<code>/chucnyserver/certs</code> folder path onto your device as a <strong>CA Certificate</strong>.</li>
+                <li>Change the phone's Wi-Fi settings to the DNS shown in the server output.</li>
+                <li>Open <strong>Pokemon GO</strong> and select the <strong>Login with Google</strong>option.</li>
+                <li>You're in!</li>
+            </ol>
+        </section>
+
+        <section id="terminal-manager">
+            <h2>⌨️ How to Use the Terminal Manager <span class="beta-pill">Beta</span></h2>
+            <p>The terminal manager is still in Beta. It might have lots of bugs.</p>
+            <ol>
+                <li>Run <code>/chucnyserver/__main__.py</code>.</li>
+                <li>Run <code>/chucnyserver/terminal.py</code>.</li>
+            </ol>
+        </section>
+
+        <section id="features">
+            <h2>📝 Features</h2>
+            <ul class="features-layout">
+                <li>
+                    <strong>World Manager</strong>
+                    <span>Manage all PokeStops coordinates, gyms, structures, and events.</span>
+                </li>
+                
+                <li>
+                    <strong>Community Day</strong>
+                    <span>Manually launch and test specialized community day events.</span>
+                </li>
+                <li>
+                    <strong>Gym Battles</strong>
+                    <span>Deploy and battle Pokémon within target regional gym locations using vintage structural mechanics.</span>
+                </li>
+                
+                <li>
+                    <strong>OSM POI Importer</strong>
+                    <span>Batch map up to 10,000 global PokeStops targets at once by targeting public database feeds through direct OpenStreetMap API processing loops.</span>
+                </li>
+                <li>
+                    <strong>Terminal Manager</strong>
+                    <span>An alternative, lightweight admin panel manager.</span>
+                </li>
+            </ul>
+        </section>
+<div class="gallery-grid">
+            <div class="gallery-main">
+                <div class="screenshot-label"></div>
+                <div class="img-wrapper">
+                    <img src="screenshots/01_SCROT.png" alt="">
+                </div>
+            </div>
+            <div class="gallery-thumbs">
+                <div class="gallery-thumb-card">
+                    <div class="screenshot-label"></div>
+                    <div class="img-wrapper">
+                        <img src="screenshots/03_SCROT" alt="">
+                    </div>
+                </div>
+                <div class="gallery-thumb-card">
+                    <div class="screenshot-label"></div>
+                    <div class="img-wrapper">
+                        <img src="screenshots/02_SCROT" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>ChucnyServer &copy; 2026</p>
+        </footer>
     </div>
-
-    <!-- SECONDARY LINKS -->
-    <div class="side">
-
-        <div class="small">
-            <h2>Where technology comes to life</h2>
-            <div style="font-size:13px; color:var(--muted)">
-                I'm Chucny. A web, AR and computing developer designing projects that actually let us connect technology to our real world with such things as AR, stocks and maps. Something you never knew could come to life in our technology.
-            </div>
-        </div>
-
-        <div class="small">
-            <h2>CONTACT</h2>
-            <div style="font-size:13px; color:var(--muted)">
-                Contact me at: koppispoke@gmail.com
-                <br>Or at @chucny on Discord
-            </div>
-        </div>
-
-        <div class="small">
-            <h2>WIZARD PLANET</h2>
-            <div style="font-size:13px; color:var(--muted)">
-                We develope Wizard Planet, a new AR geolocational experience built for the modern web.
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-<footer>
-    <div></div>
-    <div>© Chucny 2026</div>
-</footer>
-
-</div>
 
 </body>
 </html>
+
+</script>
